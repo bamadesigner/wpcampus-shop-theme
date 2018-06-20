@@ -1,0 +1,225 @@
+$container-full-max-width: 920px;
+$header-margin-bottom: 4.25em;
+$element-margin-vert: 1.5rem;
+
+// PANELS
+$panel-bg: rgba( #000, 0.05 );
+$panel-color: #222;
+$panel-padding-vert: 20px;
+$panel-padding-horiz: 20px;
+
+$wpc-dark-blue: #2e3641;
+$wpc-royal-blue: #1159bd;
+
+@mixin for-screen-reader() {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+	position: absolute !important;
+	white-space: nowrap !important;
+	width: 1px !important;
+	height: 1px !important;
+	overflow: hidden !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+body {
+	background: #fff;
+	color: #222;
+	cursor: auto;
+	font-family: "Open Sans",sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+}
+
+// Remove this default margin on home page and add to notifications
+.home.blog .site-header,
+.home.page:not(.page-template-template-homepage)
+.site-header,
+.home.post-type-archive-product .site-header {
+	margin-bottom: $header-margin-bottom;
+}
+
+#wpc-notifications {
+	margin: (0-$header-margin-bottom) 0 3em;
+}
+
+a {
+	text-decoration: underline;
+	color: #1159bd;
+}
+
+h1 {
+	margin: 0 0 1em 0;
+}
+
+.panel {
+	display: block;
+	background: $panel-bg;
+	padding: $panel-padding-vert $panel-padding-horiz;
+	margin: $element-margin-vert 0;
+	color: $panel-color;
+
+	&.wpc-stickers {
+		margin: 0 0 2.5em;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	> *:first-child {
+		margin-top: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+
+	&.center {
+		text-align: center;
+	}
+
+	&.red {
+		background: #900;
+		color: #fff;
+	}
+
+	&.light-red {
+		background: rgba(#700,0.07);
+		color: $panel-color;
+	}
+
+	&.blue {
+		background: $wpc-dark-blue;
+		color: #fff;
+	}
+
+	&.light-blue {
+		background: rgba( $wpc-dark-blue, 0.1 );
+		color: $panel-color;
+	}
+
+	&.royal-blue {
+		background: $wpc-royal-blue;
+		color: #fff;
+	}
+
+	&.light-royal-blue {
+		background: rgba( $wpc-royal-blue, 0.1 );
+	}
+
+	&.success {
+		background: rgba(0,255,0,.2);
+		color: $panel-color;
+	}
+
+	&.bigger {
+		font-size: 1.2rem;
+		line-height: 1.7;
+	}
+}
+
+.input-text,
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=url],
+textarea {
+	background: #fff;
+
+	&:hover,
+	&:focus {
+		background: #fff;
+	}
+}
+
+.added_to_cart:focus, .button:focus, button:focus, input[type=button]:focus, input[type=reset]:focus, .added_to_cart.loading, .button.loading, button.loading, input[type=button].loading, input[type=reset].loading, input[type=submit].loading {
+	opacity: 1;
+}
+
+button.menu-toggle {
+	float: none;
+	width: 100%;
+	margin: 1em 0 0 0;
+
+	&:hover,
+	&:focus {
+		background: #000;
+	}
+}
+
+.site-header .custom-logo-link img,
+.site-header .site-logo-anchor img,
+.site-header .site-logo-link img {
+	display: block;
+	max-width: 655px !important;
+	max-height: none;
+	width: 100%;
+	height: auto;
+}
+
+.site-header-cart {
+	a {
+		text-decoration: none;
+	}
+}
+
+body.home .woocommerce-products-header {
+	padding: 0 !important;
+}
+
+ul.products {
+	a {
+		text-decoration: none;
+	}
+
+	.woocommerce-loop-product__title {
+		line-height: 1.4;
+	}
+}
+
+article {
+
+	img {
+		margin-bottom: 3em;
+	}
+}
+
+@media (min-width: 768px) {
+
+	.col-full {
+		max-width: $container-full-max-width;
+	}
+
+	.custom-logo-link,
+	.site-branding,
+	.site-header-cart,
+	.site-logo-anchor,
+	.site-logo-link,
+	.site-search {
+		margin-bottom: 0.5em;
+	}
+
+	.site-header-cart .cart-contents .count {
+		opacity: 0.8;
+	}
+
+	.storefront-full-width-content .woocommerce-products-header,
+	.storefront-full-width-content.woocommerce-account .entry-header,
+	.storefront-full-width-content.woocommerce-cart .entry-header,
+	.storefront-full-width-content.woocommerce-checkout .entry-header {
+		padding-bottom: 3em;
+	}
+
+	.storefront-breadcrumb {
+		margin: 0;
+		padding-top: 0;
+	}
+}
