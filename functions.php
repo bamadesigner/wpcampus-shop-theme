@@ -177,3 +177,9 @@ function wpcampus_shop_print_network_notifications() {
 	}
 }
 add_action( 'storefront_before_content', 'wpcampus_shop_print_network_notifications' );
+
+function wpcampus_thankyou( $thankyoutext, $order ) {
+	$added_text = $thankyoutext . '<p>You should receive an email confirmation. Make sure you check your Spam or Junk Mail folders if you don't see it.</p>';
+	return $added_text ;
+}
+add_filter( 'woocommerce_thankyou_order_received_text', 'wpcampus_thankyou', 10, 2 );
