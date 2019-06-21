@@ -19,6 +19,10 @@ do_action( 'storefront_content_bottom' );
 
 	do_action( 'storefront_before_footer' );
 
+	if ( function_exists( 'wpcampus_print_network_coc' ) ) {
+		wpcampus_print_network_coc();
+	}
+
 	if ( function_exists( 'wpcampus_print_network_footer' ) ) {
 		wpcampus_print_network_footer();
 	}
