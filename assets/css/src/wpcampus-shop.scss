@@ -1,5 +1,5 @@
 $container-full-max-width: 920px;
-$header-margin-bottom: 4.25em;
+$header-margin-bottom: 2.5em;
 $element-margin-vert: 1.5rem;
 
 // PANELS
@@ -34,6 +34,17 @@ body {
 	line-height: 1.5;
 	margin: 0;
 	padding: 0;
+
+	&.home {
+
+		#wpc-notifications {
+			margin: (0-$header-margin-bottom) 0 3em;
+		}
+
+		.woocommerce-products-header {
+			padding: 0 !important;
+		}
+	}
 }
 
 // Remove this default margin on home page and add to notifications
@@ -44,13 +55,10 @@ body {
 	margin-bottom: $header-margin-bottom;
 }
 
-#wpc-notifications {
-	margin: (0-$header-margin-bottom) 0 3em;
-}
-
 a {
 	text-decoration: underline;
 	color: #1159bd;
+	font-weight: inherit;
 }
 
 h1 {
@@ -133,6 +141,8 @@ input[type=text],
 input[type=url],
 textarea {
 	background: #fff;
+	border: 1px solid #ddd;
+	font-weight: inherit;
 
 	&:hover,
 	&:focus {
@@ -171,10 +181,6 @@ button.menu-toggle {
 	}
 }
 
-body.home .woocommerce-products-header {
-	padding: 0 !important;
-}
-
 ul.products {
 	a {
 		text-decoration: none;
@@ -185,11 +191,20 @@ ul.products {
 	}
 }
 
+.hentry,
+.site-main {
+	margin: 0;
+}
+
 article {
 
 	img {
 		margin-bottom: 3em;
 	}
+}
+
+.inv-recaptcha-holder {
+	margin: 1rem 0 0 0;
 }
 
 @media (min-width: 768px) {
@@ -220,6 +235,5 @@ article {
 
 	.storefront-breadcrumb {
 		margin: 0;
-		padding-top: 0;
 	}
 }

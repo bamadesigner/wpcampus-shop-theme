@@ -48,7 +48,7 @@ add_filter( 'wpcampus_open_sans_font_weights', 'wpcampus_shop_load_open_sans_wei
 function wpcampus_shop_enqueue_styles_scripts() {
 
 	// Get the directory.
-	$wpcampus_assets_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/build/';
+	$wpcampus_assets_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/';
 
 	// Remove the child styles added by Storefront.
 	wp_dequeue_style( 'storefront-child-style' );

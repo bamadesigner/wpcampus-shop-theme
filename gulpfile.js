@@ -10,17 +10,17 @@ const shell = require('gulp-shell');
 // Define the source paths for each file type.
 const src = {
 	php: ['**/*.php','!vendor/**','!node_modules/**'],
-	sass: ['assets/src/sass/**/*','!assets/src/sass/components']
+	css: ['assets/css/src/**/*']
 };
 
 // Define the destination paths for each file type.
 const dest = {
-	sass: 'assets/build/css'
+	css: 'assets/css'
 };
 
-// Take care of SASS.
-gulp.task('sass', function() {
-	return gulp.src(src.sass)
+// Take care of CSS.
+gulp.task('css', function() {
+	return gulp.src(src.css)
 		.pipe(sass({
 			outputStyle: 'expanded'
 		}).on('error', sass.logError))
@@ -35,8 +35,8 @@ gulp.task('sass', function() {
 		.pipe(rename({
 			suffix: '.min'
 		}))
-		.pipe(gulp.dest(dest.sass))
-		.pipe(notify('WPC Shop SASS compiled'));
+		.pipe(gulp.dest(dest.css))
+		.pipe(notify('WPC Shop CSS compiled'));
 });
 
 // "Sniff" our PHP.
@@ -57,12 +57,12 @@ gulp.task('php', function() {
 gulp.task('test',['php']);
 
 // Compile all the things.
-gulp.task('compile',['sass']);
+gulp.task('compile',['css']);
 
 // I've got my eyes on you(r file changes).
 gulp.task('watch',['default'],function() {
 	gulp.watch(src.php,['php']);
-	gulp.watch(src.sass,['sass']);
+	gulp.watch(src.css,['css']);
 });
 
 // Let's get this party started.
