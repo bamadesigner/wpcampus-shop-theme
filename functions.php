@@ -12,19 +12,9 @@ function wpcampus_shop_setup_theme() {
 	// Load the textdomain.
 	load_theme_textdomain( 'wpcampus-shop', get_stylesheet_directory() . '/languages' );
 
-	// Enable network banner.
-	if ( function_exists( 'wpcampus_enable_network_banner' ) ) {
-		wpcampus_enable_network_banner();
-	}
-
-	// Enable network notifications.
-	if ( function_exists( 'wpcampus_enable_network_notifications' ) ) {
-		wpcampus_enable_network_notifications();
-	}
-
-	// Enable network footer.
-	if ( function_exists( 'wpcampus_enable_network_footer' ) ) {
-		wpcampus_enable_network_footer();
+	// Enable network components.
+	if ( function_exists( 'wpcampus_network_enable' ) ) {
+		wpcampus_network_enable( array( 'banner', 'notifications', 'coc', 'footer' ) );
 	}
 
 	// Remove default footer actions so we can replace with our footer.
