@@ -54,10 +54,10 @@ function wpcampus_shop_enqueue_styles_scripts() {
 	wp_dequeue_style( 'storefront-child-style' );
 
 	// Enqueue the base styles.
-	wp_enqueue_style( 'wpcampus-shop', $wpcampus_assets_dir . 'css/wpcampus-shop.min.css' ); //, array(), null, 'all' );
+	wp_enqueue_style( 'wpcampus-shop', $wpcampus_assets_dir . 'css/wpcampus-shop.min.css', array( 'storefront-style' ) ); //null, 'all' );
 
 }
-add_action( 'wp_enqueue_scripts', 'wpcampus_shop_enqueue_styles_scripts', 100 );
+add_action( 'wp_enqueue_scripts', 'wpcampus_shop_enqueue_styles_scripts', 1000 );
 
 /**
  * Overite Storefront's site logo markup.
