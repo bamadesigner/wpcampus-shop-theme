@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/wpcampus/wpcampus-shop-theme#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.9.3",
     "gulp-merge-media-queries": "^0.2.1",
