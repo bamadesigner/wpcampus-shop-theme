@@ -14,13 +14,14 @@ function wpcampus_shop_setup_theme() {
 
 	// Enable network components.
 	if ( function_exists( 'wpcampus_network_enable' ) ) {
-		wpcampus_network_enable( array( 'banner', 'notifications', 'coc', 'footer' ) );
+		wpcampus_network_enable( [ 'banner', 'notifications', 'mailchimp', 'coc', 'footer' ] );
 	}
 
 	// Remove default footer actions so we can replace with our footer.
 	remove_all_actions( 'storefront_footer' );
 
 }
+
 add_action( 'after_setup_theme', 'wpcampus_shop_setup_theme', 1 );
 
 /**
@@ -28,14 +29,17 @@ add_action( 'after_setup_theme', 'wpcampus_shop_setup_theme', 1 );
  * font weights we need are added.
  */
 function wpcampus_shop_load_open_sans_weights( $weights ) {
-	return array_merge( $weights, array( 400, 600, 700 ) );
+	return array_merge( $weights, [ 400, 600, 700 ] );
 }
+
 add_filter( 'wpcampus_open_sans_font_weights', 'wpcampus_shop_load_open_sans_weights' );
 
 /**
  * Setup styles and scripts.
  */
 function wpcampus_shop_enqueue_styles_scripts() {
+
+	$assets_ver = '1.1';
 
 	// Get the directory.
 	$wpcampus_assets_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/';
@@ -44,9 +48,10 @@ function wpcampus_shop_enqueue_styles_scripts() {
 	wp_dequeue_style( 'storefront-child-style' );
 
 	// Enqueue the base styles.
-	wp_enqueue_style( 'wpcampus-shop', $wpcampus_assets_dir . 'css/wpcampus-shop.min.css', array( 'storefront-style' ) ); //null, 'all' );
+	wp_enqueue_style( 'wpcampus-shop', $wpcampus_assets_dir . 'css/wpcampus-shop.min.css', [ 'storefront-style' ], $assets_ver );
 
 }
+
 add_action( 'wp_enqueue_scripts', 'wpcampus_shop_enqueue_styles_scripts', 1000 );
 
 /**
@@ -58,7 +63,7 @@ function storefront_site_branding() {
 	$wpcampus_images_dir = trailingslashit( get_stylesheet_directory_uri() ) . 'assets/images/';
 
 	?>
-	<div class="site-branding">
+    <div class="site-branding">
 		<?php
 
 		// Setup the image.
@@ -70,14 +75,14 @@ function storefront_site_branding() {
 
 		if ( is_home() || is_front_page() ) :
 			?>
-			<h1 class="logo"><?php echo $logo; ?></h1>
-			<?php
+            <h1 class="logo"><?php echo $logo; ?></h1>
+		<?php
 		else :
 			echo $logo;
 		endif;
 
 		?>
-	</div>
+    </div>
 	<?php
 }
 
@@ -86,12 +91,12 @@ function storefront_site_branding() {
  */
 function storefront_page_header() {
 	?>
-	<header class="entry-header">
+    <header class="entry-header">
 		<?php
 		//storefront_post_thumbnail( 'full' );
 		the_title( '<h1 class="entry-title">', '</h1>' );
 		?>
-	</header><!-- .entry-header -->
+    </header><!-- .entry-header -->
 	<?php
 }
 
@@ -104,6 +109,7 @@ function wpcampus_shop_show_page_title( $show ) {
 	}
 	return $show;
 }
+
 add_filter( 'woocommerce_show_page_title', 'wpcampus_shop_show_page_title' );
 
 /**
@@ -112,6 +118,7 @@ add_filter( 'woocommerce_show_page_title', 'wpcampus_shop_show_page_title' );
 function wpcampus_shop_remove_storefront_credit() {
 	return false;
 }
+
 add_filter( 'storefront_credit_link', 'wpcampus_shop_remove_storefront_credit' );
 
 /**
@@ -119,11 +126,12 @@ add_filter( 'storefront_credit_link', 'wpcampus_shop_remove_storefront_credit' )
  */
 function wpcampus_shop_print_network_banner() {
 	if ( function_exists( 'wpcampus_print_network_banner' ) ) {
-		wpcampus_print_network_banner( array(
+		wpcampus_print_network_banner( [
 			'skip_nav_id' => 'main',
-		));
+		] );
 	}
 }
+
 add_action( 'storefront_before_site', 'wpcampus_shop_print_network_banner' );
 
 /**
@@ -131,9 +139,9 @@ add_action( 'storefront_before_site', 'wpcampus_shop_print_network_banner' );
  */
 function wpcampus_shop_print_sticker_panel() {
 	?>
-	<div class="panel royal-blue center wpc-stickers">
+    <div class="panel royal-blue center wpc-stickers">
 		<?php printf( __( '%1$sVisit our %2$s marketplace%3$s to order %4$s stickers.', '' ), '<a href="https://www.stickermule.com/user/1070667397/stickers">', 'stickermule', '</a>', 'WPCampus' ); ?>
-	</div>
+    </div>
 	<?php
 }
 
@@ -146,17 +154,8 @@ function wpcampus_shop_add_sticker_panel() {
 		wpcampus_shop_print_sticker_panel();
 	}
 }
-add_action( 'storefront_content_top', 'wpcampus_shop_add_sticker_panel' );
 
-/**
- * Add the Mailchimp signup form to bottom of all content.
- */
-function wpcampus_shop_add_mailchimp_to_content() {
-	if ( function_exists( 'wpcampus_print_mailchimp_signup' ) ) {
-		wpcampus_print_mailchimp_signup();
-	}
-}
-add_action( 'storefront_content_bottom', 'wpcampus_shop_add_mailchimp_to_content' );
+//add_action( 'storefront_content_top', 'wpcampus_shop_add_sticker_panel' );
 
 /**
  * Print network notifications.
@@ -166,6 +165,7 @@ function wpcampus_shop_print_network_notifications() {
 		wpcampus_print_network_notifications();
 	}
 }
+
 add_action( 'storefront_before_content', 'wpcampus_shop_print_network_notifications' );
 
 /**
@@ -175,4 +175,5 @@ add_action( 'storefront_before_content', 'wpcampus_shop_print_network_notificati
 function wpcampus_woocommerce_thankyou( $thankyoutext, $order ) {
 	return $thankyoutext . "<p>You should receive an email confirmation. Make sure you check your Spam or Junk Mail folders if you don't see it.</p>";
 }
+
 add_filter( 'woocommerce_thankyou_order_received_text', 'wpcampus_woocommerce_thankyou', 10, 2 );

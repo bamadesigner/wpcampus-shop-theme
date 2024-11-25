@@ -5,11 +5,9 @@ const mergeMediaQueries = require('gulp-merge-media-queries');
 const notify = require('gulp-notify');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
-const shell = require('gulp-shell');
 
 // Define the source paths for each file type.
 const src = {
-	php: ['**/*.php','!vendor/**','!node_modules/**'],
 	css: ['assets/css/src/**/*']
 };
 
@@ -19,14 +17,13 @@ const dest = {
 };
 
 // Take care of CSS.
-gulp.task('css', function() {
+gulp.task('css', function( done ) {
 	return gulp.src(src.css)
 		.pipe(sass({
 			outputStyle: 'expanded'
 		}).on('error', sass.logError))
 		.pipe(mergeMediaQueries())
 		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
 			cascade: false
 		}))
 		.pipe(cleanCSS({
@@ -36,34 +33,18 @@ gulp.task('css', function() {
 			suffix: '.min'
 		}))
 		.pipe(gulp.dest(dest.css))
-		.pipe(notify('WPC Shop CSS compiled'));
+		.pipe(notify('WPC Shop SASS compiled'))
+		.on('end', done);
 });
-
-// "Sniff" our PHP.
-gulp.task('php', function() {
-	// TODO: Clean up. Want to run command and show notify for sniff errors.
-	return gulp.src('functions.php', {read: false})
-		.pipe(shell(['composer sniff'], {
-			ignoreErrors: true,
-			verbose: false
-		}))
-		.pipe(notify('WPC Shop PHP sniffed'), {
-			onLast: true,
-			emitError: true
-		});
-});
-
-// Test our files.
-gulp.task('test',['php']);
 
 // Compile all the things.
-gulp.task('compile',['css']);
-
-// I've got my eyes on you(r file changes).
-gulp.task('watch',['default'],function() {
-	gulp.watch(src.php,['php']);
-	gulp.watch(src.css,['css']);
-});
+gulp.task('compile', gulp.series('css'));
 
 // Let's get this party started.
-gulp.task('default',['compile','test']);
+gulp.task('default', gulp.series('compile'));
+
+// I've got my eyes on you(r file changes).
+gulp.task('watch', gulp.series('default', function( done ) {
+	gulp.watch(src.css, gulp.series('css'));
+	return done();
+}));

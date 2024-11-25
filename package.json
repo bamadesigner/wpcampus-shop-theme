@@ -7,9 +7,7 @@
     "url": "git+https://github.com/wpcampus/wpcampus-shop-theme.git"
   },
   "scripts": {
-    "install": "composer install",
-    "postinstall": "gulp",
-    "test": "composer sniff"
+    "postinstall": "gulp"
   },
   "author": "WPCampus <code@wpcampus.org>",
   "contributors": [
@@ -19,15 +17,17 @@
   "bugs": {
     "url": "https://github.com/wpcampus/wpcampus-shop-theme/issues"
   },
+  "browserslist": [
+    "last 2 versions"
+  ],
   "homepage": "https://github.com/wpcampus/wpcampus-shop-theme#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-clean-css": "^3.9.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.2.0",
     "gulp-merge-media-queries": "^0.2.1",
-    "gulp-notify": "^3.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.2.1",
-    "gulp-shell": "^0.6.3"
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2"
   }
 }
